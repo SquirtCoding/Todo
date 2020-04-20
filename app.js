@@ -24,7 +24,7 @@ function addTodo(event){
     newTodo.classList.add('todo-item');
     todoDiv.appendChild(newTodo);
 
-    saveLocalTodos(todoInput.value);
+
 
 // create buttons
     const completedButton = document.createElement('button');
@@ -62,64 +62,3 @@ function deleteCheck(e){
         todo.classList.toggle('completed');
     }
 }
-
-function saveLocalTodos(todo){
-    let todos;
-    if(localStorage.getItem('todos') === null){
-        todos =[];
-    }else{
-        todos = JSON.parse(localStorage.getItem('todos'));
-    }
-    todos.push(todo);
-    localStorage.setItem('todos', JSON.stringify(todos));
-
-}
-
-function getTodos(){
-    console.log("hello");
-    let todos;
-    if(localStorage.getItem('todos') === null){
-        todos =[];
-    }else{
-        todos = JSON.parse(localStorage.getItem('todos'));
-    }
-    todos.forEach(function(todo){
-        const todoDiv = document.createElement('div');
-        todoDiv.classList.add("todo");
-    // Create LI
-        const newTodo = document.createElement('li');
-        newTodo.innerText = todo;
-    
-        newTodo.classList.add('todo-item');
-        todoDiv.appendChild(newTodo);
-    
-    
-    // create buttons
-        const completedButton = document.createElement('button');
-        completedButton.innerHTML = '<i class="fas fa-check"></i>';
-        completedButton.classList.add('complete-btn');
-        todoDiv.appendChild(completedButton);    
-    // create buttons
-        const trashButton = document.createElement('button');
-        trashButton.innerHTML = '<i class="fas fa-trash"></i>';
-        trashButton.classList.add('trash-btn');
-        todoDiv.appendChild(trashButton);
-        
-    // append to list
-        todoList.appendChild(todoDiv);
-
-    })
-}
-
-function removeLocalTodos(todo){
-    let todos;
-    if(localStorage.getItem('todos') === null){
-        todos =[];
-    }else{
-        todos = JSON.parse(localStorage.getItem('todos'));
-    }
-    const todoIndex = todo.children[0].innerText;
-    todos.splice(todo.indexOf(todoInput), 1);
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
-
